@@ -1,6 +1,6 @@
 TASKS_ROOT = File.expand_path(File.dirname(__FILE__))
 require "#{TASKS_ROOT}/../replace_rake_tasks"
-Require "#{TASKS_ROOT}/../run_psql"
+require "#{TASKS_ROOT}/../run_psql"
 
 # we override these tasks to use ddl file instead of ruby
 
