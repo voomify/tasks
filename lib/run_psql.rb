@@ -6,6 +6,7 @@ module RunPSQL
     username = config["username"]
     host = config["host"]
     port = config["port"]
-    `psql -f #{file_with_path} -U #{username} -h #{host} -p #{port} #{database} `
+    password = config["password"]
+    `export PGPASSWORD="#{password}";psql -f #{file_with_path} -U #{username} -h #{host} -p #{port} #{database};export PGPASSWORD=""`
   end
 end

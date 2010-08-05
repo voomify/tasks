@@ -1,6 +1,8 @@
-require 'replace_rake_tasks'
-require 'run_psql'
-# we override thes``````````````````````````e tasks to use ddl file instead of ruby
+TASKS_ROOT = File.expand_path(File.dirname(__FILE__))
+require "#{TASKS_ROOT}/../replace_rake_tasks"
+Require "#{TASKS_ROOT}/../run_psql"
+
+# we override these tasks to use ddl file instead of ruby
 
 namespace :db do
   namespace :schema do
