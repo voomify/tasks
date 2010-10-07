@@ -13,7 +13,7 @@ namespace :db do
     override_task :dump => :environment do
       output_file = db_file_path("schema.sql")
       FileUtils.mv(output_file, "#{output_file}.last") if FileTest.exists?(output_file)
-      run_pg_command(current_env, "pg_dump hal -c -o -O -x -s", output_file)
+      run_pg_command(current_env, "pg_dump -c -o -O -x -s", output_file)
       puts "Schema has been updated from the database. Last schema backed up to #{output_file}.last"
     end
   end
