@@ -29,6 +29,7 @@ namespace :db do
 
     override_task :load => :environment do
       run_psql_file(ActiveRecord::Base.configurations["test"], "schema.sql")
+      run_psql_file(ActiveRecord::Base.configurations["test"], "seed.sql")
     end
   end
 
