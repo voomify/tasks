@@ -16,5 +16,8 @@ module RunPSQL
     password = config["password"]
     pipe_to_file = output_file ? "> #{output_file}" : ""
     `export PGPASSWORD="#{password}";#{command} -U #{username} -h #{host} #{port ? '-p '+-port : ''} #{database} #{pipe_to_file};export PGPASSWORD=""`
+    if $?.exitstatus != 0
+      raise "pg command failed"
+    end
   end
 end
