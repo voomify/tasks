@@ -7,11 +7,11 @@ require 'fileutils'
 namespace :db do
   namespace :schema do
     override_task :load => :environment do
-      run_psql_file(current_env, "schema.sql")
+      run_psql_file(current_env, "sql/schema.sql")
     end                                                                                     
 
     override_task :dump => :environment do
-      output_file = db_file_path("schema.sql")
+      output_file = db_file_path("sql/schema.sql")
       FileUtils.mv(output_file, "#{output_file}.last") if FileTest.exists?(output_file)
       run_pg_command(current_env, "pg_dump -c -o -O -x -s", output_file)
       puts "Schema has been updated from the database. Last schema backed up to #{output_file}.last"
@@ -19,7 +19,7 @@ namespace :db do
   end
 
   override_task :seed => :environment do
-    run_psql_file(current_env, "seed.sql")
+    run_psql_file(current_env, "sql/seed.sql")
   end
 
   namespace :test do
@@ -28,8 +28,8 @@ namespace :db do
     end
 
     override_task :load => :environment do
-      run_psql_file(ActiveRecord::Base.configurations["test"], "schema.sql")
-      run_psql_file(ActiveRecord::Base.configurations["test"], "seed.sql")
+      run_psql_file(ActiveRecord::Base.configurations["test"], "sql/schema.sql")
+      run_psql_file(ActiveRecord::Base.configurations["test"], "sql/seed.sql")
     end
   end
 
