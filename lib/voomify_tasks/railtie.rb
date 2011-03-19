@@ -5,7 +5,6 @@ module Voomify
     class Railtie < Rails::Railtie      
       rake_tasks do
         load "tasks/enviornments.rake"
-        load "tasks/databases.rake"
       end
     end
   end
