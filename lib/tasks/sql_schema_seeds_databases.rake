@@ -37,7 +37,7 @@ private
 
   include RunPSQL
 
-  def current_env
+  def curr  ent_env
     ActiveRecord::Base.configurations[Rails.env]
   end
 
