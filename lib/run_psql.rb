@@ -14,11 +14,14 @@ module RunPSQL
     port = config["port"]
     password = config["password"]
     pipe_to_file = output_file ? "> #{output_file}" : ""
-    variables = "-v PGPASSWORD=\"#{password}\" -v ON_ERROR_STOP=1"
+    variables = "-v ON_ERROR_STOP=1"
     puts "Executing: #{command} -U #{username} #{host ? '-h '+host : ''} #{port ? '-p '+port.to_s : ''} #{database} #{pipe_to_file}"
+    `export PGPASSWORD="#{password}"`
     `#{command} #{variables} -U #{username} #{host ? '-h '+host : ''} #{port ? '-p '+port.to_s : ''} #{database} #{pipe_to_file}`
-    puts "exit status: #{$?.exitstatus}"
-    if $?.exitstatus != 0
+    exit_status = $?.exitstatus
+    `export PGPASSWORD=""`
+    puts "exit status: #{exit_status}"
+    if exit_status != 0
       raise "pg command failed"
     end
   end
