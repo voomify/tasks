@@ -1,4 +1,9 @@
 module RunPSQL
+
+  def current_env
+    ActiveRecord::Base.configurations[Rails.env]
+   end
+
   def db_file_path(filename)
     "#{Rails.root}/db/#{filename}"
   end
